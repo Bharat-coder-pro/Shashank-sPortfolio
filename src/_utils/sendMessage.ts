@@ -1,9 +1,9 @@
 import emailjs from "@emailjs/browser";
 
-async function sendMessage(name: string, email: string, message: string, subject: string) {
+async function sendMessage(name: string, email: string, title: string, message: string) {
 
     const res = await emailjs.send("service_2b80q3w", "template_5h3nmgp", {
-        title: subject,
+        title,
         name,
         message,
         email,

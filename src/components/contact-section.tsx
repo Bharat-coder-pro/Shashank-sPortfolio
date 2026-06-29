@@ -46,18 +46,22 @@ export function ContactSection() {
       }
     })
   })
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
-    const res = sendMessage(e.target[0].value, e.target[1].value, e.target[3].value, e.target[2].value)
-    if (res) {
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const title = formData.get("title") as string;
+    const message = formData.get("message") as string;
+    try {
+      const res = await sendMessage(name, email, title, message);
       console.log(res);
       alert("Thank you for your message! I'll get back to you soon.");
-      e.target[0].value = "";
-      e.target[1].value = "";
-      e.target[2].value = "";
-      e.target[3].value = "";
-    } else {
+      form.reset();
+    } catch (error) {
+      console.error(error);
       alert("Something went wrong! Please try again.");
     }
   };
@@ -87,6 +91,7 @@ export function ContactSection() {
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
                     <Input
+                      name="name"
                       id="name"
                       placeholder="John Doe"
                       required
@@ -95,6 +100,7 @@ export function ContactSection() {
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
+                      name="email"
                       id="email"
                       type="email"
                       placeholder="john@example.com"
@@ -106,6 +112,7 @@ export function ContactSection() {
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
                   <Input
+                    name="title"
                     id="subject"
                     placeholder="Project Inquiry"
                     required
@@ -115,6 +122,7 @@ export function ContactSection() {
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
                   <Textarea
+                    name="message"
                     id="message"
                     placeholder="Tell me about your project requirements..."
                     rows={5}

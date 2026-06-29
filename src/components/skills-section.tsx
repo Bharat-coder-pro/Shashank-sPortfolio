@@ -11,7 +11,6 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 export function SkillsSection() {
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const skillRef = useRef<HTMLDivElement>(null);
   const tsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
