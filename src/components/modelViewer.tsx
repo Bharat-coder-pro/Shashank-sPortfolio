@@ -2,8 +2,9 @@ import Modal from "./Modal/Modal"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei";
 import { AppContext } from "../context/AppContextProvider"
-import { useContext } from "react"
+import { Suspense, useContext } from "react"
 import AssemblyModel from "./Models/Model-I";
+import { ModelLoader } from "./Loader";
 
 
 export default function ModelViewer() {
@@ -24,7 +25,9 @@ export default function ModelViewer() {
           {/* Your GLB model */}
           <ambientLight intensity={2} />
           <directionalLight position={[5, 5, 5]} />
-          <AssemblyModel />
+          <Suspense fallback={<ModelLoader />}>
+            <AssemblyModel />
+          </Suspense>
           <OrbitControls
             enableZoom={true}
             enablePan={true}
