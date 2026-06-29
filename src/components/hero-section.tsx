@@ -115,11 +115,11 @@ export function HeroSection() {
             Creating innovative mechanical designs that bring concepts to reality.
           </p>
 
-          <div className="flex relative z-6 flex-wrap gap-4 justify-center">
+          <div className="flex relative z-20 flex-wrap gap-4 justify-center">
             <Button
               size="lg"
               onClick={() => scrollToSection("projects")}
-              className="group"
+              className="group relative z-20"
             >
               View Projects
               <FiArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -127,8 +127,9 @@ export function HeroSection() {
             <Button
               size="lg"
               variant="outline"
+              className="button cursor-pointer relative z-20"
               ref={cvRef}
-              onClick={() => downloadResume()}
+              onClick={downloadResume}
             >
               <FiDownload className="mr-2 h-4 w-4" />
               Download Resume
