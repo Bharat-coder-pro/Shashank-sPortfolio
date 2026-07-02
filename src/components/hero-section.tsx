@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export function HeroSection() {
+export function HeroSection({ setHeroVideoLoaded }: { setHeroVideoLoaded: (value: boolean) => void }) {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const charRef = useRef<HTMLImageElement>(null);
@@ -89,21 +89,84 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 rounded-b-lg">
-      <div className="absolute inset-0 bg-grid-slate-500 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.8))] -z-10" />
+    <section ref={containerRef} className="min-h-[90vh] md:min-h-screen flex items-center justify-center relative overflow-hidden bg-[#F8FAFC] rounded-b-lg">
       <video
         autoPlay
         loop
         muted
         playsInline
         className="absolute inset-0 h-full z-5 w-full object-cover"
+        preload="auto"
+        onCanPlayThrough={() => setHeroVideoLoaded(true)}
       >
         <source src="/bg.mp4" type="video/mp4" />
       </video>
-      <div className="relative bottom-20 container mx-auto px-4 py-20">
+      <div className="relative group bottom-20 container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="relative z-6 top-10 flex items-center justify-center">
-            <img src="/oLogo.png" alt="logo" className="size-[300px]  hover:drop-shadow-lg sm:block object-cover aspect-square [mask-image:linear-gradient(to_bottom,black_70%,transparent)]" />
+            <img src="/oLogo.png" alt="logo" className="size-[300px] hidden md:block hover:drop-shadow-lg sm:block object-cover aspect-square [mask-image:linear-gradient(to_bottom,black_70%,transparent)]" />
+            <img src="/heroAvatar.png" alt="avatar" className="size-[150px] relative -top-15 bg-zinc-800/50 rounded-full md:hidden backdrop-blur-xl objet-cover border-4 border-slate-100 " />
+            <div
+              className="
+              md:hidden
+      absolute
+      bottom-full
+      left-1/2
+      -translate-x-1/2
+      -translate-y-[50px]
+      mb-4
+
+      opacity-0
+      invisible
+      scale-95
+
+      group-hover:opacity-100
+      group-hover:visible
+      group-hover:scale-100
+
+      transition-all
+      duration-300
+      ease-out
+
+      whitespace-nowrap
+
+      bg-neutral-900
+      text-white
+      text-sm
+      font-medium
+
+      px-4
+      py-2
+
+      rounded-2xl
+      shadow-xl
+      border
+      border-neutral-700
+    "
+            >
+              Hii! 👋 I'm Shashank, its great to meet you.
+
+              {/* Bubble Tail */}
+              <div
+                className="
+        absolute
+        left-1/2
+        -translate-x-1/2
+        top-full
+
+        w-4
+        h-4
+
+        bg-neutral-900
+        border-r
+        border-b
+        border-neutral-700
+
+        rotate-45
+        -mt-2
+      "
+              />
+            </div>
           </div>
 
           <h1 ref={textRef} style={{ fontFamily: "'Black Ops One', system-ui" }} className="text-shadow-md text-shadow-black relative z-8 mb-6 text-xl sm:text-2xl md:text-4xl text-slate-100">
