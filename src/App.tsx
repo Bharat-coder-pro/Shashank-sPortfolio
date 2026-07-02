@@ -12,6 +12,7 @@ import { MechanicalLoader } from "./components/Loader";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
 
   useEffect(() => {
     const handleLoad = () => {
@@ -27,14 +28,14 @@ export default function App() {
     return () => window.removeEventListener("load", handleLoad);
   }, []);
 
-  if (loading) {
+  if (loading && !heroVideoLoaded) {
     return <MechanicalLoader />;
   }
   return (
     <div className="size-full">
       <AppContextProvider>
         <Navbar />
-        <HeroSection />
+        <HeroSection setHeroVideoLoaded={setHeroVideoLoaded} />
         <ProjectsSection />
         <SkillsSection />
         <ContactSection />
